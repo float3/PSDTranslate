@@ -31,14 +31,19 @@ GoogleTranslator translator = new();
 
 void TranslatePSD(string path)
 {
-    using PsdImage im = (PsdImage) Image.Load(path);
+    using PsdImage im = (PsdImage)Image.Load(path);
     foreach (Layer layer in im.Layers)
     {
         string text = Regex.Match(layer.DisplayName, regex).Value;
         if (text.Length > 0)
         {
             Console.WriteLine("translating " + text);
-            layer.DisplayName = translator.TranslateSingle(text);
+            List<string> translated = translator.TranslateFromCacheOrNew(text);
+            if (translated.Count > 0)
+            {
+                layer.DisplayName = translated[0];
+            }
+
             Console.WriteLine("result " + layer.DisplayName);
             Console.WriteLine();
         }
