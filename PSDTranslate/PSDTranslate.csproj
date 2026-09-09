@@ -13,7 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspose.PSD" Version="22.6.0"/>
+        <PackageReference Include="Aspose.PSD" Version="26.8.0"/>
     </ItemGroup>
 
 </Project>
