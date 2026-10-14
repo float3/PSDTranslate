@@ -1,0 +1,38 @@
+name: Weekly
+
+# Nothing here is pinned to an exact version: Aspose.PSD floats and the
+# GoogleTranslate.NET submodule moves on its own. A weekly build says whether
+# the tool still compiles against what those two have become. The translation
+# endpoint itself is watched by the weekly job in GoogleTranslate.NET.
+on:
+  schedule:
+    - cron: "47 6 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: weekly-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build against current dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          submodules: recursive
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
