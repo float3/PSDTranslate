@@ -1,18 +1,18 @@
 # PSDTranslate
 
-Translates the layer names of `.psd` files to English using Google Translate. C# rewrite of [psd_translate](https://github.com/float3/psd_translate); reads files with Aspose.PSD and translates through the bundled [GoogleTranslate.NET](https://github.com/float3/GoogleTranslate.NET) submodule.
+translates the layer names of `.psd` files to English using Google Translate. C# rewrite of [psd_translate](https://github.com/float3/psd_translate); reads files with Aspose.PSD and translates through the bundled [GoogleTranslate.NET](https://github.com/float3/GoogleTranslate.NET) submodule.
 
-## Build
+## build
 
 ```sh
 git clone --recurse-submodules https://github.com/float3/PSDTranslate
 dotnet build -c Release
 ```
 
-## Usage
+## usage
 
 ```sh
 PSDTranslate path/to/files/*.psd
 ```
 
-Without arguments it translates every `.psd` in the current directory.
+without arguments it translates every `.psd` in the current directory.
